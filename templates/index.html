@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+
+<!-- CENTERED HEADER -->
+<header class="header-center">
+    <h1 class="typing">Check How Strong Your Password!</h1>
+</header>
+
+<div class="main">
+    <form method="POST" action="/check_password">
+        <label for="password">Enter Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit" id="btn">Check Strength</button>
+    </form>
+
+    <h3 id="userInput"></h3>
+
+    <!-- Tube Progress Bar -->
+    <div id="strengthTube" class="strength-tube">
+        <div id="strengthBar" class="strength-bar"></div>
+    </div>
+
+    <div id="passwordStrength"></div>
+    {% if strength_label %}
+    <h2 class="text-center mt-3">Strength: {{ strength_label }}</h2>
+
+    {% if feedback %}
+        <ul class="text-center">
+            {% for suggestion in feedback %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
+</div>
+
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
+
+
+
